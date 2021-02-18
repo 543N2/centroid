@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centroid</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        button, select, input {
+            margin: 5px;
+            width: 150px;
+            display: inline-block;
+        }
+        .form {
+            width: 10%;
+            padding: 10px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        canvas {
+            margin: 0;
+            height: 100vh;
+            width: 100%;
+            background-color: rgb(211, 211, 211);
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <div class="form">
+        <input id="url" type="text" placeholder="Image URL...">
+        <button id="load">Load image</button>
+        <select name="" id="bodySections">
+            <option value="freeShape">Free shape</option>
+            <option value="head">Head</option>
+            <option value="thorax">Thorax</option>
+            <option value="abdominopelvic">Abdomen & Pelvis</option>
+            <option value="leftArm">Left arm</option>
+            <option value="leftForearm">Left forearm</option>
+            <option value="leftHand">Left hand</option>
+            <option value="leftThigh">Left thigh</option>
+            <option value="leftShank">Left shank</option>
+            <option value="leftFoot">Left foot</option>
+            <option value="rightArm">Right arm</option>
+            <option value="rightForearm">Right forearm</option>
+            <option value="rightHand">Right hand</option>
+            <option value="rightThigh">Right thigh</option>
+            <option value="rightShank">Right shank</option>
+            <option value="rightFoot">Right foot</option>
+        </select>
+        <button id="start">Start</button>
+        <button id="end">End</button>
+        <button id="centroid">Centroid!</button>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
