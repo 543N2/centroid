@@ -18,36 +18,11 @@ let sections = {
     rightFoot: { w: 1.431, },
 }
 
-// Form elements and listeners
-let i_url = document.getElementById("url").value
-
-let b_load = document.getElementById("load")
-b_load.addEventListener('click', e => loadImage(i_url))
-
-let b_start = document.getElementById("start")
-b_start.addEventListener('click', e => start())
-
-let b_end = document.getElementById("end")
-b_end.addEventListener('click', e => end())
-
-let b_centroid = document.getElementById("centroid")
-b_centroid.addEventListener('click', e => centroid())
-
-let t_log = document.getElementById("log")
-
-let d_bodySections = document.getElementById("bodySections")
-
 // Canvas and drawing context
 let canvas = document.getElementById("canvas")
 let ctx = canvas.getContext("2d")
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
-
-// Variables
-let section = sections[d_bodySections.value]
-let points = []
-let systemCentroid
-let message = ""
 
 // Picture as background
 const loadImage = (url) => {
@@ -63,6 +38,34 @@ const loadImage = (url) => {
     writeLog(message)
     console.log(message)
 }
+
+// Form elements and listeners
+let i_url = document.getElementById("url").value
+
+let b_load = document.getElementById("load")
+b_load.addEventListener('click', e => loadImage(i_url))
+
+let b_start = document.getElementById("start")
+b_start.addEventListener('click', e => start())
+
+let b_end = document.getElementById("end")
+b_end.addEventListener('click', e => end())
+
+let b_centroid = document.getElementById("centroid")
+b_centroid.addEventListener('click', e => centroid())
+
+let b_toCSV = document.getElementById("toCSV")
+b_toCSV.addEventListener('click', e => toCSV())
+
+let t_log = document.getElementById("log")
+
+let d_bodySections = document.getElementById("bodySections")
+
+// Variables
+let section = sections[d_bodySections.value]
+let points = []
+let systemCentroid
+let message = ""
 
 // Clears current points
 const clearPoints = () => points = []
@@ -181,6 +184,21 @@ function centroid() {
     systemCentroid = findCentroid(coordinates)
     drawPoints(systemCentroid, 'system')
     message = `Completed all sections. \n\n Full system centroid at (${Math.round(systemCentroid.x)},${Math.round(systemCentroid.y)})`
+    writeLog(message)
+    console.log(message)
+}
+
+// converts data to csv
+const toCSV = () => {
+    let csvData = document.getElementById("csvData")
+    let message =
+        `Exported CSV Data: ${'\n\n'}Section, X, Y${'\n'}`
+    for (s in sections) {
+        if (sections[s].centroid) {
+            message += `${s}, ${sections[s].centroid.x}, ${sections[s].centroid.y} ${'\n'}`
+        }
+    }
+    if (systemCentroid) message += `systemCentroid, ${systemCentroid.x}, ${systemCentroid.y}${'\n------------\n'}`
     writeLog(message)
     console.log(message)
 }
