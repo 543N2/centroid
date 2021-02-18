@@ -18,12 +18,36 @@ let sections = {
     rightFoot: { w: 1.431, },
 }
 
+// Form elements and listeners
+let i_url = document.getElementById("url").value
+
+let b_load = document.getElementById("load")
+b_load.addEventListener('click', e => loadImage(i_url))
+
+let b_start = document.getElementById("start")
+b_start.addEventListener('click', e => start())
+
+let b_end = document.getElementById("end")
+b_end.addEventListener('click', e => end())
+
+let b_centroid = document.getElementById("centroid")
+b_centroid.addEventListener('click', e => centroid())
+
+let t_log = document.getElementById("log")
+
+let d_bodySections = document.getElementById("bodySections")
+
 // Canvas and drawing context
 let canvas = document.getElementById("canvas")
 let ctx = canvas.getContext("2d")
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 
+// Variables
+let section = sections[d_bodySections.value]
+let points = []
+let systemCentroid
+let message = ""
 
 // Picture as background
 const loadImage = (url) => {
@@ -35,32 +59,19 @@ const loadImage = (url) => {
         ctx.drawImage(background, 250, 0)
 
     }
+    message = `Image loaded.`
+    writeLog(message)
+    console.log(message)
 }
-
-// Form elements
-let b_url = document.getElementById("url").value
-
-let b_load = document.getElementById("load")
-b_load.addEventListener('click', e => loadImage(b_url))
-
-let b_start = document.getElementById("start")
-b_start.addEventListener('click', e => start())
-
-let b_end = document.getElementById("end")
-b_end.addEventListener('click', e => end())
-
-let b_centroid = document.getElementById("centroid")
-b_centroid.addEventListener('click', e => centroid())
-
-let d_bodySections = document.getElementById("bodySections")
-
-// Variables
-let section = sections[d_bodySections.value]
-let points = []
-let systemCentroid
 
 // Clears current points
 const clearPoints = () => points = []
+
+// Writes in event log
+const writeLog = (message) => {
+    t_log.innerHTML += message + '\n\n '
+    t_log.scrollTop = t_log.scrollHeight
+}
 
 // Set the coordinate points of mouse clicks as (section vertices).
 const setPoints = (e) => {
@@ -129,7 +140,9 @@ function findCentroid(coordinates) {
 function startCallback(e) {
     setPoints(e)
     drawPoints(points[points.length - 1], 'point')
-    // console.log(section)
+    message = ` - Selected point at (${points[points.length - 1].x},${points[points.length - 1].y})`
+    writeLog(message)
+    console.log(message)
 }
 
 // Creates the selected section.
@@ -137,6 +150,9 @@ function start() {
     section = sections[d_bodySections.value]
     clearPoints()
     canvas.addEventListener('click', startCallback)
+    message = `Started to draw ${d_bodySections.value} section.`
+    writeLog(message)
+    console.log(message)
 }
 
 // Consolidates the selected section
@@ -145,6 +161,9 @@ function end() {
     drawSection(section.points)
     section.centroid = findCentroid(section.points)
     drawPoints(section.centroid, 'section')
+    message = `Completed ${d_bodySections.value} section. \n\n ${d_bodySections.value} centroid at (${Math.round(section.centroid.x)},${Math.round(section.centroid.y)})`
+    writeLog(message)
+    console.log(message)
 }
 
 // Finds the system centroid
@@ -159,7 +178,9 @@ function centroid() {
             })
         }
     }
-    // console.log(coordinates)
     systemCentroid = findCentroid(coordinates)
     drawPoints(systemCentroid, 'system')
+    message = `Completed all sections. \n\n Full system centroid at (${Math.round(systemCentroid.x)},${Math.round(systemCentroid.y)})`
+    writeLog(message)
+    console.log(message)
 }

@@ -12,10 +12,14 @@
             box-sizing: border-box;
             text-align: center;
         }
-        button, select, input {
+        button, select, input, textarea {
             margin: 5px;
+            padding: 2px;
             width: 150px;
             display: inline-block;
+        }
+        textarea {
+            font-size: 0.6rem;
         }
         .form {
             width: 10%;
@@ -59,6 +63,8 @@
         <button id="start">Start</button>
         <button id="end">End</button>
         <button id="centroid">Centroid!</button>
+        <br><br>
+        <textarea name="" id="log" cols="" rows="20" placeholder="Event log"></textarea>
     </div>
     <script src="app.js"></script>
 </body>
