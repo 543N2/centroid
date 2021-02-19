@@ -24,6 +24,12 @@ let ctx = canvas.getContext("2d")
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 
+let b_load = document.getElementById("load")
+b_load.addEventListener('click', e => {
+    let i_url = document.getElementById("url").value
+    loadImage(i_url)
+})
+
 // Picture as background
 const loadImage = (url) => {
     let background = new Image()
@@ -34,19 +40,17 @@ const loadImage = (url) => {
         ctx.drawImage(background, 250, 0)
 
     }
-    message = `Image loaded.`
+    message = `Image load requested.`
     writeLog(message)
     console.log(message)
 }
 
 // Form elements and listeners
-let i_url = document.getElementById("url").value
+let d_bodySections = document.getElementById("bodySections")
+d_bodySections.addEventListener('change', e => start())
 
-let b_load = document.getElementById("load")
-b_load.addEventListener('click', e => loadImage(i_url))
-
-let b_start = document.getElementById("start")
-b_start.addEventListener('click', e => start())
+// let b_start = document.getElementById("start")
+// b_start.addEventListener('click', e => start())
 
 let b_end = document.getElementById("end")
 b_end.addEventListener('click', e => end())
@@ -58,8 +62,6 @@ let b_toCSV = document.getElementById("toCSV")
 b_toCSV.addEventListener('click', e => toCSV())
 
 let t_log = document.getElementById("log")
-
-let d_bodySections = document.getElementById("bodySections")
 
 // Variables
 let section = sections[d_bodySections.value]
