@@ -3,7 +3,7 @@ A centroid calculator for the human body in 2d.
 
 ## How to use:
 
-####**1. Up-load a picture**
+**1. Up-load a picture**
 
 - Find a nice picture of the human body on the Web and copy the URL.
 - Paste the image URL in the **"Image URL..."** input box.
@@ -11,7 +11,7 @@ A centroid calculator for the human body in 2d.
 
 Once the image is loaded, you are ready to start creating body sections.
 
-####**2. Sketch the body sections**
+**2. Sketch the body sections**
 - Choose the body section you want to sketch in the **"Body sections"** dropdown menu.
 - Click for every node of the body section you're sketching. A small dot will appear.
 - When you are done with the section, click **"Done!"** button.
@@ -19,7 +19,7 @@ Once the image is loaded, you are ready to start creating body sections.
 
 Now that you finished sketching all the body sections, you can now calculate the whole system centroid.
 
-####**3. Find the centroid of the system:**
+**3. Find the centroid of the system:**
 - Click the **Centroid** button to calculate and place the system centroid.
 
 If you need the data in CSV format, click **to CSV** button and copy from the **Event log** text area.
